@@ -1,0 +1,18 @@
+# Virtual environment
+ros_seg_env/
+ROS2_segmentation_clean/ros_seg_env/
+
+# Model weights
+checkpoints/
+*.keras
+*.h5
+
+# Outputs
+output_images/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
