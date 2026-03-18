@@ -39,7 +39,7 @@ However, the extension introduces **severe class imbalance challenges**, where r
 
 ## Flow Diagram
 
-📌 *(Insert Flow Diagram Here)*
+<img width="1200" height="896" alt="Flow Diagram" src="https://github.com/user-attachments/assets/905f6a34-f2f5-4992-ab70-ea7f1e2e0668" />
 
 ```
 RGB + JSON → Mask Generation → TFRecords
