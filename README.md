@@ -33,7 +33,8 @@ However, the extension introduces **severe class imbalance challenges**, where r
 
 ##  Architecture
 
-<img width="496" height="396" alt="image" src="https://github.com/user-attachments/assets/d18f507b-7b5b-499d-9949-b19c2073ad06" />
+<img width="1200" height="900" alt="image" src="https://github.com/user-attachments/assets/b5eecdda-c597-448d-a51b-59487f994d1b" />
+
 
 
 ---
