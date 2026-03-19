@@ -1,4 +1,4 @@
-# Semantic Segmentation for ROSWITHA using RGB-D and ROS2
+# Enhancing ROSWITHA's visual perception through deep learning which is based on 10-Class segmentation model
 
 ---
 
@@ -178,6 +178,16 @@ ros2 run segmentation_node inference
 | Bottle | 0.638 | 0.3544 |
 | Microwave | 0.001 | 0.0911 |
 | **Mean IoU** | **0.575** | **0.4464** |
+
+
+## Final comparisons
+
+| Metric            | 7-Class Model | 10-Class Model |
+|------------------|--------------|----------------|
+| Global Accuracy  | 0.9584       | /              |
+| Mean IoU         | 0.7270       | 0.575         |
+| Mean Accuracy    | /            | 0.4464         |
+| Number of Classes| 7            | 10             |
 
 ---
 
