@@ -55,6 +55,52 @@ RGB + JSON → Mask Generation → TFRecords → Train/Val Split
          → Evaluation (IoU, Pixel Accuracy)
 ```
 
+- **Step 1:**  
+  `10classes_frauas_json_to_label.py`  
+  → Converts annotation JSON files into pixel-wise segmentation masks.
+
+- **Step 2:**  
+  `10classes_frauas_to_tfrecords.py`  
+  → Converts images + masks into TFRecord format (optimized for TensorFlow).
+
+- **Step 3:**  
+  `train10_fixed.ipynb`  
+  → Loads TFRecords and trains the segmentation model.
+
+- **Step 4:**  
+  Best model checkpoint is saved for inference/ROS2 deployment.
+
+---
+##  What Each File Does : [Code](https://github.com/rajansingh44/AIS_Object_detection_25_26/tree/main/Main%20Code)
+
+### 1️⃣ `10classes_frauas_json_to_label.py`
+
+- **Input:** JSON annotations (FRA-UAS / COCO)  
+- **Output:** Pixel-wise segmentation masks  
+- **Purpose:** Convert annotations → training-ready labels  
+
+---
+
+### 2️⃣ `10classes_frauas_to_tfrecords.py`
+
+- **Input:** Images + generated masks  
+- **Output:** TFRecord dataset  
+- **Purpose:** Efficient data pipeline for TensorFlow training  
+
+---
+
+### 3️⃣ `train10_fixed.ipynb`
+
+- **Input:** TFRecords  
+
+- **Performs:**
+  - Model loading (custom CNN)  
+  - Conservative fine-tuning  
+  - Training + validation  
+
+- **Output:**
+  - Best model (`.keras`)  
+  - Metrics (IoU, Accuracy)  
 ---
 
 ## Methodology
