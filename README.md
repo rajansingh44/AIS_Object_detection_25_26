@@ -287,3 +287,8 @@ With the above improvements applied together — particularly a 10× increase in
 This work presented a complete end-to-end semantic segmentation framework for the assistive robot ROSWITHA, covering the full pipeline from raw annotated data to real-time ROS2 deployment. By extending perception from 7 to 10 classes — adding laptops, backpacks, and microwaves — the project broadened the robot's scene understanding for complex indoor environments. The FRA-UAS-SS architecture, combining an FC-HarDNet backbone with MMAF-Net adaptive fusion and SE attention blocks, demonstrated strong segmentation on dominant classes. 
 
 The combined focal and Dice loss, paired with a conservative fine-tuning strategy developed over 14 systematic training sessions, achieved the best possible balance between rare-class learning and dominant-class stability. Successful deployment within ROS2 Humble at 15 Hz validated the practical feasibility of deep learning-based robotic perception. However, the mIoU drop from 0.7270 (7-class) to 0.575 (10-class) confirms that for classes below 0.01% of training pixels, algorithmic techniques alone cannot compensate for data scarcity. Future work should prioritise targeted data collection, transformer-based architectures, and continual learning techniques to bridge this gap
+
+
+##  Team Members: ODT-03
+1. Rajan Vijaykumar Singh (1567294)
+2. Pradeep Tiwari (1567166)
