@@ -55,23 +55,22 @@ RGB + JSON → Mask Generation → TFRecords → Train/Val Split
          → Evaluation (IoU, Pixel Accuracy)
 ```
 
-- **Step 1:**  
-  `10classes_frauas_json_to_label.py`  
-  → Converts annotation JSON files into pixel-wise segmentation masks.
+# Step 1: Convert annotations to masks
+[python 10classes_frauas_json_to_label.py] (https://github.com/rajansingh44/AIS_Object_detection_25_26/blob/main/Main%20Code/10classes_frauas_json_to_label.py)
 
-- **Step 2:**  
-  `10classes_frauas_to_tfrecords.py`  
-  → Converts images + masks into TFRecord format (optimized for TensorFlow).
+# Step 2: Convert dataset to TFRecords
+[python 10classes_frauas_to_tfrecords.py] (https://github.com/rajansingh44/AIS_Object_detection_25_26/blob/main/Main%20Code/10classes_frauas_to_tfrecords.py)
 
-- **Step 3:**  
-  `train10_fixed.ipynb`  
-  → Loads TFRecords and trains the segmentation model.
+# Step 3: Train model
+[train10_fixed.ipynb] (https://github.com/rajansingh44/AIS_Object_detection_25_26/blob/main/Main%20Code/train10_fixed.ipynb)
 
-- **Step 4:**  
-  Best model checkpoint is saved for inference/ROS2 deployment.
+# Step 4: Run inference
+[python ROS2_segmentation_clean/folder_segmentation.py] (https://github.com/rajansingh44/AIS_Object_detection_25_26/blob/main/ROS2_segmentation_clean/folder_segmentation.py)
 
 ---
-##  What Each File Does : [Code](https://github.com/rajansingh44/AIS_Object_detection_25_26/tree/main/Main%20Code)
+##  What Each File Does : 
+
+## 📂 Stage 1: Data Preparation
 
 ### 1️⃣ `10classes_frauas_json_to_label.py`
 
@@ -89,18 +88,57 @@ RGB + JSON → Mask Generation → TFRecords → Train/Val Split
 
 ---
 
+## 🧠 Stage 2: Model Training
+
 ### 3️⃣ `train10_fixed.ipynb`
 
 - **Input:** TFRecords  
 
 - **Performs:**
-  - Model loading (custom CNN)  
-  - Conservative fine-tuning  
+  - Custom Encoder-Decoder CNN loading  
+  - Conservative fine-tuning strategy  
   - Training + validation  
 
 - **Output:**
   - Best model (`.keras`)  
-  - Metrics (IoU, Accuracy)  
+  - Metrics:
+    - Mean IoU  
+    - Pixel Accuracy  
+
+---
+
+##  Stage 3: Inference / ROS2 Pipeline
+
+###  Folder: `ROS2_segmentation_clean`
+
+---
+
+### 4️⃣ `input_images/`
+
+- Stores images for inference  
+
+---
+
+### 5️⃣ `folder_segmentation.py`
+
+- **Input:**
+  - Trained model (`.keras`)  
+  - Images from `input_images/`  
+
+- **Performs:**
+  - Loads trained model  
+  - Runs segmentation on each image  
+  - Applies mask generation  
+
+- **Output:**
+  - Segmented images  
+
+---
+
+### 6️⃣ `Output Images after segmentation/`
+
+- Stores final segmented outputs  
+- Contains pixel-wise classified images   
 ---
 
 ## Methodology
@@ -161,7 +199,8 @@ The ROS2 implementation is structured into three modular nodes that communicate 
 | **Visualisation Node**  | `/segmentation/mask` | `/segmentation/overlay`       | Converts predicted masks into colour-coded segmentation outputs and overlays them onto the original RGB image for human interpretation |
  
 This decoupled design means each node can be developed, tested, and replaced independently. Multiple downstream consumers can subscribe to the same segmentation topic without modifying the inference node, and producers and consumers can operate at different rates.
- 
+
+
 ### Communication and Synchronisation
  
 **Quality of Service (QoS) Policies:** Camera streams use `SENSOR_DATA` QoS, which prioritises low latency over guaranteed delivery — under heavy load the system drops frames rather than building a backlog, keeping the perception clock current. Segmentation output uses `RELIABLE` QoS with a deeper queue, ensuring downstream consumers (e.g., navigation planners) receive every published mask even during brief network congestion.
@@ -234,6 +273,11 @@ ros2 run segmentation_node inference
 | Mean IoU         | 0.7270       | 0.575         |
 | Mean Accuracy    | /            | 0.4464         |
 | Number of Classes| 7            | 10             |
+
+
+
+
+<img width="2168" height="1480" alt="backpack_analysis_3" src="https://github.com/user-attachments/assets/9ec8ece2-e2e4-4a07-a04f-bf3b48bb261f" />
 
 ---
 
